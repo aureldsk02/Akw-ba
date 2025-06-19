@@ -1,3 +1,80 @@
+# Guide de démarrage rapide
+
+Bienvenue ! Voici les étapes pour configurer et lancer ce projet Laravel après avoir cloné le dépôt.
+
+## Prérequis
+
+- PHP ≥ 8.1
+- Composer
+- MySQL ou autre base de données compatible
+- Node.js & npm (pour les assets front-end, si nécessaire)
+
+## Étapes d’installation
+
+1. **Cloner le dépôt**
+   ```bash
+   git clone <url-du-depot>
+   cd <nom-du-dossier>
+   ```
+
+2. **Installer les dépendances PHP**
+   ```bash
+   composer install
+   ```
+
+3. **Copier le fichier d’environnement**
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Générer la clé d’application**
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Configurer la base de données**
+   - Ouvrez le fichier `.env` et modifiez les variables suivantes selon votre configuration :
+     ```
+     DB_DATABASE=nom_de_votre_base
+     DB_USERNAME=utilisateur
+     DB_PASSWORD=motdepasse
+     ```
+
+6. **Lancer les migrations (et seeders si besoin)**
+   ```bash
+   php artisan migrate
+   # ou, si vous souhaitez ajouter des données de test
+   php artisan db:seed
+   ```
+
+7. **Installer les dépendances front-end (optionnel)**
+   ```bash
+   npm install
+   npm run dev
+   # ou pour la version de production
+   npm run build
+   ```
+
+8. **Démarrer le serveur de développement**
+   ```bash
+   php artisan serve
+   ```
+   Le projet sera accessible sur `http://localhost:8000`.
+
+---
+
+## Problèmes fréquents
+
+- Vérifiez que toutes les extensions PHP requises sont installées.
+- Si vous avez des erreurs de permissions, essayez :
+  ```bash
+  chmod -R 775 storage bootstrap/cache
+  ```
+
+## Ressources
+
+- Documentation Laravel : https://laravel.com/docs
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

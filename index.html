@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akwêba - Créateur de Sites pour Commerçants</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .preview-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body class="smooth-scroll bg-light font-sans text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <span class="text-primary text-2xl font-bold">Akwêba</span>
+                        <span class="ml-1 bg-accent text-white text-xs px-2 py-1 rounded-md">PRO</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#hero" class="text-gray-600 hover:text-primary transition">Accueil</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary transition">À Propos</a>
+                    <a href="#process" class="text-gray-600 hover:text-primary transition">Fonctionnement</a>
+                    <a href="#form-section" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Créer mon site</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#hero" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Accueil</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">À Propos</a>
+                <a href="#process" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Fonctionnement</a>
+                <a href="#form-section" class="block px-3 py-2 bg-primary text-white rounded-md">Créer mon site</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-28 pb-20 bg-gradient-to-r from-primary to-blue-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                        Votre boutique en ligne <br>
+                        <span class="bg-accent px-2 transform -skew-x-12 inline-block">professionnelle</span>
+                        en quelques minutes
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl opacity-90">
+                        Akwêba crée pour vous un site web élégant et efficace pour présenter vos produits 
+                        et services. Aucune compétence technique requise !
+                    </p>
+                    <div class="mt-10 flex flex-wrap gap-4">
+                        <a href="#form-section" class="bg-accent text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-amber-600 transition transform hover:scale-105">
+                            Commencer maintenant <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#process" class="bg-white text-primary px-8 py-3 rounded-md text-lg font-medium hover:bg-gray-100 transition">
+                            Voir comment ça marche
+                        </a>
+                    </div>
+                    <div class="mt-10 flex items-center">
+                        <div class="flex">
+                            <div class="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-blue-500 -ml-2">
+                                <i class="fas fa-store text-white"></i>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-blue-500 -ml-2">
+                                <i class="fas fa-coffee text-white"></i>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-blue-500 -ml-2">
+                                <i class="fas fa-tshirt text-white"></i>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-blue-500 -ml-2">
+                                <span class="text-white font-medium">+200</span>
+                            </div>
+                        </div>
+                        <p class="ml-3 text-sm opacity-85">Commerçants nous ont déjà fait confiance</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform rotate-3">
+                        <div class="bg-gray-800 h-8 flex items-center px-4">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64"></div>
+                            <div class="mt-4">
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-48 h-6"></div>
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-32 h-4 mt-3"></div>
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-4 mt-3"></div>
+                                <div class="bg-accent rounded-md w-24 h-10 mt-6"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-primary rounded-2xl shadow-lg p-4 w-32 transform -rotate-6">
+                        <div class="text-center text-white font-bold">
+                            <p>Boutique</p>
+                            <p>en ligne</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold">Pourquoi choisir Akwêba ?</h2>
+                <div class="w-24 h-1 bg-accent mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-light p-8 rounded-xl shadow-md text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mx-auto">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Rapide et Simple</h3>
+                    <p class="mt-3 text-gray-600">
+                        Créez votre site professionnel en quelques minutes avec notre formulaire intuitif. 
+                        Pas besoin de compétences techniques.
+                    </p>
+                </div>
+                
+                <div class="bg-light p-8 rounded-xl shadow-md text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-white text-2xl mx-auto">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Totalement Responsive</h3>
+                    <p class="mt-3 text-gray-600">
+                        Votre site s'adapte parfaitement à tous les appareils : smartphones, tablettes et ordinateurs.
+                    </p>
+                </div>
+                
+                <div class="bg-light p-8 rounded-xl shadow-md text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl mx-auto">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Optimisé pour la Vente</h3>
+                    <p class="mt-3 text-gray-600">
+                        Des templates spécialement conçus pour mettre en valeur vos produits et augmenter vos ventes.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-primary rounded-2xl p-8 md:p-12 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-white">
+                        <h2 class="text-3xl font-bold">Un service complet pour votre commerce</h2>
+                        <ul class="mt-6 space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>Site vitrine pour présenter vos produits/services</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>Formulaire de contact intégré</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>Intégration des réseaux sociaux</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>Hébergement inclus</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>Accès à votre tableau de bord</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="bg-blue-400 rounded-xl p-1 shadow-lg">
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                                    <div>
+                                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-48 h-6"></div>
+                                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-32 h-4 mt-2"></div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-32"></div>
+                                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-32"></div>
+                                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-32"></div>
+                                </div>
+                                <div class="mt-4 bg-gray-200 border-2 border-dashed rounded-xl w-3/4 h-8 mx-auto"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold">Comment créer votre site ?</h2>
+                <p class="mt-4 text-xl text-gray-600">4 étapes simples vers votre boutique en ligne</p>
+                <div class="w-24 h-1 bg-accent mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="step-card bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto">
+                        1
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Formulaire</h3>
+                    <p class="mt-3 text-gray-600">
+                        Remplissez notre formulaire détaillé avec les informations sur votre commerce
+                    </p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto">
+                        2
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Personnalisation</h3>
+                    <p class="mt-3 text-gray-600">
+                        Sélectionnez le design qui correspond à l'identité de votre marque
+                    </p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto">
+                        3
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Validation</h3>
+                    <p class="mt-3 text-gray-600">
+                        Recevez un aperçu et validez votre site avant sa publication
+                    </p>
+                </div>
+                
+                <div class="step-card bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto">
+                        4
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5">Publication</h3>
+                    <p class="mt-3 text-gray-600">
+                        Votre site est mis en ligne et prêt à accueillir vos clients
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-600">Vous êtes prêt à créer votre boutique ?</p>
+                <a href="#form-section" class="mt-4 inline-block bg-accent text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-amber-600 transition">
+                    Commencer maintenant
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="form-section" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold">Créez votre site</h2>
+                <p class="mt-4 text-xl text-gray-600">Remplissez ce formulaire pour générer votre boutique en ligne</p>
+                <div class="w-24 h-1 bg-accent mx-auto mt-4"></div>
+            </div>
+            
+            <!-- Multi-step form -->
+            <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+                <!-- Form Progress -->
+                <div class="bg-gray-50 px-8 py-6 flex justify-between items-center">
+                    <div>
+                        <div id="step-indicator" class="text-lg font-medium text-gray-600">Étape 1/4 : Informations de base</div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prev-btn" class="bg-white text-primary px-4 py-2 rounded-md text-sm font-medium border border-primary hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <i class="fas fa-arrow-left mr-2"></i>Précédent
+                        </button>
+                        <button id="next-btn" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600">
+                            Suivant <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Form Steps -->
+                <div id="form-container" class="p-8">
+                    <!-- Step 1: Basic Info -->
+                    <div class="form-step active" id="step1">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Informations sur votre commerce</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nom du commerce *</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ex: Boutique Chic, Café de la Gare" id="business-name">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Secteur d'activité *</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" id="business-type">
+                                    <option value="" disabled selected>Sélectionnez un secteur</option>
+                                    <option value="restaurant">Restauration - Café</option>
+                                    <option value="boutique">Boutique - Prêt-à-porter</option>
+                                    <option value="beaute">Beauté - Coiffure</option>
+                                    <option value="alimentaire">Alimentaire - Épicerie</option>
+                                    <option value="artisanat">Artisanat - Création</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Description du commerce *</label>
+                                <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Mission, histoire et vision de votre entreprise..." id="business-description"></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Site web actuel (si applicable)</label>
+                                <input type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="https://www.votresite.com" id="business-website">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Products/Services -->
+                    <div class="form-step" id="step2">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Vos produits et services</h3>
+                        
+                        <div id="products-container" class="space-y-4">
+                            <!-- Product items will be added here dynamically -->
+                        </div>
+                        
+                        <button id="add-product" class="mt-6 flex items-center text-primary font-medium">
+                            <i class="fas fa-plus-circle mr-2"></i> Ajouter un produit/service
+                        </button>
+                    </div>
+                    
+                    <!-- Step 3: Contact Info -->
+                    <div class="form-step" id="step3">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Coordonnées de contact</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="contact@votredomaine.com" id="business-email">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
+                                <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="06 12 34 56 78" id="business-phone">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Adresse complète *</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Numéro et rue" id="business-address">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Code postal *</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Code postal" id="business-zip">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ville *</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ville" id="business-city">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pays *</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Pays" id="business-country">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-700 mb-3">Horaires d'ouverture</h4>
+                            <div id="hours-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Hours will be added here dynamically -->
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-medium text-gray-700 mb-3">Réseaux sociaux</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Facebook</label>
+                                    <input type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="https://facebook.com/votrepage" id="social-facebook">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Instagram</label>
+                                    <input type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="https://instagram.com/votrecompte" id="social-instagram">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                                    <input type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="https://linkedin.com/company/votreentreprise" id="social-linkedin">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Design & Submit -->
+                    <div class="form-step" id="step4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Personnalisation et finalisation</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-3">Choisissez votre style</h4>
+                                
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div>
+                                        <input type="radio" name="theme" id="theme1" value="classic" class="hidden peer">
+                                        <label for="theme1" class="block cursor-pointer">
+                                            <div class="bg-gray-200 border-2 border-gray-300 p-1 rounded-lg peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-blue-200">
+                                                <div class="h-32 rounded-md bg-white"></div>
+                                            </div>
+                                            <div class="mt-2 text-center text-sm font-medium">Classique</div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <input type="radio" name="theme" id="theme2" value="modern" class="hidden peer" checked>
+                                        <label for="theme2" class="block cursor-pointer">
+                                            <div class="bg-gray-200 border-2 border-gray-300 p-1 rounded-lg peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-blue-200">
+                                                <div class="h-32 rounded-md bg-primary"></div>
+                                            </div>
+                                            <div class="mt-2 text-center text-sm font-medium">Moderne</div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <input type="radio" name="theme" id="theme3" value="elegant" class="hidden peer">
+                                        <label for="theme3" class="block cursor-pointer">
+                                            <div class="bg-gray-200 border-2 border-gray-300 p-1 rounded-lg peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-blue-200">
+                                                <div class="h-32 rounded-md bg-gray-800"></div>
+                                            </div>
+                                            <div class="mt-2 text-center text-sm font-medium">Élégant</div>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-8">
+                                    <h4 class="font-medium text-gray-700 mb-3">Vente en ligne</h4>
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Souhaitez-vous vendre en ligne ?</label>
+                                        <div class="flex items-center space-x-4">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="ecommerce" value="yes" class="text-primary focus:ring-primary">
+                                                <span class="ml-2">Oui</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="ecommerce" value="no" checked class="text-primary focus:ring-primary">
+                                                <span class="ml-2">Non</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="ecommerce-options" class="hidden space-y-4 mb-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Modes de paiement acceptés</label>
+                                            <div class="space-y-2">
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">Carte bancaire</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">PayPal</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">Virement bancaire</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Options de livraison</label>
+                                            <div class="space-y-2">
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">Livraison nationale</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">Livraison internationale</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                    <input type="checkbox" class="text-primary focus:ring-primary">
+                                                    <span class="ml-2">Retrait en magasin</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 class="font-medium text-gray-700 mb-3">Logo de votre commerce</h4>
+                                    <div class="flex items-center">
+                                        <div class="mr-4 w-16 h-16 rounded-lg bg-gray-200 border-2 border-dashed flex items-center justify-center">
+                                            <i class="fas fa-camera text-gray-400"></i>
+                                        </div>
+                                        <div>
+                                            <input type="file" id="business-logo" class="hidden">
+                                            <button id="upload-logo" class="bg-white text-primary px-4 py-2 rounded-md text-sm font-medium border border-primary hover:bg-blue-50">
+                                                Télécharger un logo
+                                            </button>
+                                            <p class="mt-1 text-sm text-gray-500">PNG, JPG - Max 2MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-3">Aperçu de votre site</h4>
+                                <div id="preview" class="preview-container p-6">
+                                    <div class="text-center">
+                                        <div class="h-16 w-16 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                            <i class="fas fa-store text-gray-500"></i>
+                                        </div>
+                                        <h3 id="preview-name" class="text-xl font-bold text-gray-800">Votre Nom de Commerce</h3>
+                                        <p id="preview-tagline" class="text-gray-600 mt-2">Votre accroche ici</p>
+                                    </div>
+                                    
+                                    <div class="mt-8 grid grid-cols-2 gap-4">
+                                        <div class="bg-white rounded-lg shadow-sm p-4">
+                                            <div class="bg-gray-200 border-2 border-dashed rounded-md w-full h-32 mb-3"></div>
+                                            <div class="font-medium">Produit 1</div>
+                                            <div class="text-sm text-gray-600">Description courte</div>
+                                        </div>
+                                        <div class="bg-white rounded-lg shadow-sm p-4">
+                                            <div class="bg-gray-200 border-2 border-dashed rounded-md w-full h-32 mb-3"></div>
+                                            <div class="font-medium">Produit 2</div>
+                                            <div class="text-sm text-gray-600">Description courte</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-8">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="terms" class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary">
+                                        <label for="terms" class="ml-3 text-sm text-gray-700">
+                                            J'accepte les <a href="#" class="text-primary hover:underline">conditions d'utilisation</a>
+                                        </label>
+                                    </div>
+                                    
+                                    <button id="submit-form" class="mt-6 w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-600 transition font-medium flex items-center justify-center">
+                                        Générer mon site 
+                                        <i class="fas fa-rocket ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">
+                        <span class="text-primary">Akwêba</span>
+                    </h3>
+                    <p class="text-gray-400 mt-4">
+                        Nous aidons les commerçants à créer leur présence en ligne rapidement et facilement.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">À Propos</a></li>
+                        <li><a href="#process" class="text-gray-400 hover:text-white transition">Fonctionnement</a></li>
+                        <li><a href="#form-section" class="text-gray-400 hover:text-white transition">Créer mon site</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Légal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">CGV</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">contact@akweba.fr</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-primary mr-3"></i>
+                            <span class="text-gray-400">+33 1 23 45 67 89</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                            <span class="text-gray-400">Paris, France</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                © 2023 Akwêba. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Form Steps Navigation
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicator = document.getElementById('step-indicator');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        let currentStep = 1;
+        
+        // Step indicator texts
+        const stepTexts = [
+            "Étape 1/4 : Informations de base",
+            "Étape 2/4 : Produits et services",
+            "Étape 3/4 : Coordonnées",
+            "Étape 4/4 : Personnalisation"
+        ];
+        
+        // Initialize products and hours
+        function initializeForm() {
+            // Initialize products
+            addProductItem();
+            addProductItem();
+            
+            // Initialize hours
+            const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+            const hoursContainer = document.getElementById('hours-container');
+            
+            days.forEach(day => {
+                const hourElement = document.createElement('div');
+                hourElement.innerHTML = `
+                    <label class="block text-sm font-medium text-gray-700 mb-1">${day}</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="8h-12h" data-day="${day.toLowerCase()}">
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="14h-18h" data-day="${day.toLowerCase()}">
+                    </div>
+                `;
+                hoursContainer.appendChild(hourElement);
+            });
+        }
+        
+        // Add a new product item
+        function addProductItem() {
+            const productsContainer = document.getElementById('products-container');
+            const productId = Date.now();
+            
+            const productElement = document.createElement('div');
+            productElement.classList.add('product-item', 'bg-blue-50', 'p-4', 'rounded-lg', 'border', 'border-blue-100');
+            productElement.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-medium">Nouveau produit/service</h4>
+                    <button class="text-gray-400 hover:text-red-500 delete-product" data-id="${productId}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Nom du produit/service</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ex: Café gourmand" data-id="${productId}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Prix (€)</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Ex: 12.50" data-id="${productId}">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Description</label>
+                        <textarea rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" placeholder="Description du produit/service" data-id="${productId}"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            productsContainer.appendChild(productElement);
+            
+            // Add event listener to delete button
+            const deleteBtn = productElement.querySelector('.delete-product');
+            deleteBtn.addEventListener('click', () => {
+                if (document.querySelectorAll('.product-item').length > 1) {
+                    productElement.remove();
+                } else {
+                    alert('Vous devez avoir au moins un produit/service.');
+                }
+            });
+        }
+        
+        // Update form step navigation
+        function updateStepNavigation() {
+            stepIndicator.textContent = stepTexts[currentStep - 1];
+            
+            if (currentStep === 1) {
+                prevBtn.disabled = true;
+                nextBtn.textContent = 'Suivant';
+                nextBtn.innerHTML = 'Suivant <i class="fas fa-arrow-right ml-2"></i>';
+            } else if (currentStep === 4) {
+                prevBtn.disabled = false;
+                nextBtn.textContent = 'Générer mon site';
+                nextBtn.innerHTML = 'Générer mon site <i class="fas fa-rocket ml-2"></i>';
+            } else {
+                prevBtn.disabled = false;
+                nextBtn.textContent = 'Suivant';
+                nextBtn.innerHTML = 'Suivant <i class="fas fa-arrow-right ml-2"></i>';
+            }
+        }
+        
+        // Validate current step
+        function validateStep(step) {
+            if (step === 1) {
+                const name = document.getElementById('business-name').value;
+                const description = document.getElementById('business-description').value;
+                
+                if (!name || !description) {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                    return false;
+                }
+                
+                // Update preview
+                document.getElementById('preview-name').textContent = name;
+                document.getElementById('preview-tagline').textContent = description.substring(0, 50) + '...';
+                
+                return true;
+            }
+            return true;
+        }
+        
+        // Navigation between steps
+        nextBtn.addEventListener('click', () => {
+            if (currentStep === 4) {
+                // Submit form
+                document.getElementById('submit-form').click();
+                return;
+            }
+            
+            if (validateStep(currentStep)) {
+                steps.forEach(step => step.classList.remove('active'));
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateStepNavigation();
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                steps.forEach(step => step.classList.remove('active'));
+                currentStep--;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateStepNavigation();
+            }
+        });
+        
+        // Upload logo button
+        document.getElementById('upload-logo').addEventListener('click', () => {
+            document.getElementById('business-logo').click();
+        });
+        
+        // Toggle e-commerce options
+        document.querySelectorAll('input[name="ecommerce"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const ecommerceOptions = document.getElementById('ecommerce-options');
+                if (this.value === 'yes') {
+                    ecommerceOptions.classList.remove('hidden');
+                } else {
+                    ecommerceOptions.classList.add('hidden');
+                }
+            });
+        });
+
+        // File input change
+        document.getElementById('business-logo').addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // For preview purposes only
+                    const preview = document.getElementById('preview').querySelector('.bg-gray-300');
+                    preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-contain">`;
+                }
+                
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        
+        // Handle form submission
+        document.getElementById('submit-form').addEventListener('click', async function() {
+            const terms = document.getElementById('terms').checked;
+            
+            if (!terms) {
+                alert('Veuillez accepter les conditions d\'utilisation.');
+                return;
+            }
+
+            // Collect data from step 1
+            const businessName = document.getElementById('business-name').value;
+            const businessType = document.getElementById('business-type').value;
+            const businessDescription = document.getElementById('business-description').value;
+            const businessWebsite = document.getElementById('business-website').value;
+
+            // Collect data from step 3 (contact info)
+            const businessEmail = document.getElementById('business-email').value;
+            const businessPhone = document.getElementById('business-phone').value;
+            const businessAddress = document.getElementById('business-address').value;
+            const businessZip = document.getElementById('business-zip').value;
+            const businessCity = document.getElementById('business-city').value;
+            const businessCountry = document.getElementById('business-country').value;
+
+            // Collect data from step 4 (design & ecommerce)
+            const selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+            const hasEcommerce = document.querySelector('input[name="ecommerce"]:checked').value === 'yes';
+
+            const formData = {
+                name: businessName,
+                description: businessDescription,
+                business_type: businessType,
+                website: businessWebsite,
+                email: businessEmail,
+                phone: businessPhone,
+                address: businessAddress,
+                postal_code: businessZip,
+                city: businessCity,
+                country: businessCountry,
+                theme: selectedTheme,
+                has_ecommerce: hasEcommerce
+            };
+
+            try {
+                const response = await fetch('http://localhost:8000/api/businesses', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Félicitations ! Votre site est en cours de création. Vous recevrez un email avec vos identifiants sous peu. (ID du commerce: ' + data.id + ')');
+                    // ... existing code ...
+                } else {
+                    console.error('Erreur lors de la création du commerce:', data);
+                    alert('Une erreur est survenue lors de la création de votre site. Veuillez vérifier la console pour plus de détails.');
+                }
+            } catch (error) {
+                console.error('Erreur réseau ou autre:', error);
+                alert('Une erreur de connexion est survenue. Assurez-vous que le serveur Laravel est en marche.');
+            }
+        });
+        
+        // Add product button
+        document.getElementById('add-product').addEventListener('click', addProductItem);
+        
+        // Initialize form when page loads
+        document.addEventListener('DOMContentLoaded', initializeForm);
+    </script>
+</body>
+</html>

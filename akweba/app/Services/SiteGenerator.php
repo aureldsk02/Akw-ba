@@ -75,5 +75,23 @@ class SiteGenerator
         if (File::exists($themePath)) {
             File::copyDirectory($themePath, $assetsPath);
         }
+
+        // Créer le dossier css si besoin
+        $cssPath = $assetsPath . '/css';
+        if (!File::exists($cssPath)) {
+            File::makeDirectory($cssPath, 0755, true);
+        }
+
+        // Créer tailwind.css minimal si absent
+        $tailwindCss = $cssPath . '/tailwind.css';
+        if (!File::exists($tailwindCss)) {
+            File::put($tailwindCss, "/* tailwind.css minimal - à remplacer par la vraie version si besoin */\nbody { }\n");
+        }
+
+        // Créer custom.css minimal si absent
+        $customCss = $cssPath . '/custom.css';
+        if (!File::exists($customCss)) {
+            File::put($customCss, "/* custom.css minimal - personnalisez ce fichier */\n");
+        }
     }
 } 

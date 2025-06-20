@@ -251,7 +251,12 @@
             const data = await response.json();
 
             if (response.ok) {
-                alert('Félicitations ! Votre site est en cours de création. Vous recevrez un email avec vos identifiants sous peu. (ID du commerce: ' + data.id + ')');
+                // alert('Félicitations ! Votre site est en cours de création. Vous recevrez un email avec vos identifiants sous peu. (ID du commerce: ' + data.id + ')');
+                if (data.site_url) {
+                    window.open(data.site_url, '_blank');
+                } else {
+                    alert('Site généré, mais aucune URL reçue.');
+                }
             } else {
                 console.error('Erreur lors de la création du commerce:', data);
                 alert('Une erreur est survenue lors de la création de votre site. Veuillez vérifier la console pour plus de détails.');

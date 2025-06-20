@@ -7,6 +7,7 @@ use App\Models\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Services\SiteGenerator;
 
 class BusinessController extends Controller
 {
@@ -39,16 +40,55 @@ class BusinessController extends Controller
             $data['slug'] = Str::slug($data['name']);
             
             $business = Business::create($data);
+
+            // Génération du site avec IA
+            $siteGenerator = new SiteGenerator($business);
+            try {
+                $generationResult = $siteGenerator->generateWithAI();
+            } catch (\Exception $e) {
+                \Log::error('Erreur génération site IA: ' . $e->getMessage());
+                return response()->json([
+                    'message' => 'Business created but site generation failed',
+                    'id' => $business->id,
+                    'error' => $e->getMessage()
+                ], 500);
+            }
             
             return response()->json([
-                'message' => 'Business created successfully',
-                'id' => $business->id
+                'message' => 'Business created and site generated successfully',
+                'id' => $business->id,
+                'site_url' => $generationResult['url']
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error creating business',
                 'error' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function generateSite($id)
+    {
+        $business = Business::find($id);
+        if (!$business) {
+            return response()->json([
+                'message' => 'Business not found'
+            ], 404);
+        }
+
+        try {
+            $siteGenerator = new SiteGenerator($business);
+            $generationResult = $siteGenerator->generateWithAI();
+
+            return response()->json([
+                'message' => 'Site generated successfully',
+                'site_url' => $generationResult['url']
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Site generation failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
-} 

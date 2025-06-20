@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Services\SiteGenerator;
+use App\Services\SiteGenerator;
 
 class BusinessController extends Controller
 {
@@ -41,21 +42,15 @@ class BusinessController extends Controller
             
             $business = Business::create($data);
             
-            // Générer le site et récupérer l'URL
-            $generator = new SiteGenerator($business);
-            $generation = $generator->generate();
-            $siteUrl = $generation['url'];
-            
             return response()->json([
                 'message' => 'Business created successfully',
-                'id' => $business->id,
-                'site_url' => $siteUrl
+                'id' => $business->id
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error creating business',
                 'error' => $e->getMessage()
             ], 500);
-        }
     }
+}
 } 

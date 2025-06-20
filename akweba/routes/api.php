@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/businesses', [BusinessController::class, 'store']); 
+Route::post('/businesses', [BusinessController::class, 'store']);
+Route::post('/businesses/{id}/generate-site', [BusinessController::class, 'generateSite']);
